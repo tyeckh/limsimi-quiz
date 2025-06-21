@@ -26,31 +26,31 @@ const LimSimiQuiz = () => {
       ]
     },
     {
-      question: "In a magical garden, two types of flowers catch your eye. Which draws you in?",
-      choices: ["Familiar flowers that remind you of home", "Impossible rainbow blossoms that shift colors"],
+      question: "Following a path, you discover a beautiful garden where magical plants sway without any wind. What draws your attention?",
+      choices: ["The familiar flowers that remind you of home and warm memories", "The impossible rainbow blossoms that shift colors and defy nature"],
       weights: [
         {sensingScore: 3, intuitionScore: 0},
         {intuitionScore: 3, sensingScore: 0}
       ]
     },
     {
-      question: "A crystal bridge hums with two different melodies. Which resonates with your soul?",
-      choices: ["Warm harmony of friendship and connection", "Clear, precise notes of mathematical beauty"],
+      question: "As you reach for your chosen plant, it transforms into a crystal bridge playing two different melodies. Which resonates with your soul?",
+      choices: ["The warm harmony that makes you think of friendship and connection", "The clear, precise notes that create perfect mathematical beauty"],
       weights: [
         {feelingScore: 3, thinkingScore: 0},
         {thinkingScore: 3, feelingScore: 0}
       ]
     },
     {
-      question: "Two streams flow before you - one steady, one playful. Which feels right for your journey?",
-      choices: ["The steady stream with clear direction", "The playful stream that curves freely"],
+      question: "Crossing the bridge, you reach the mystical river's edge. The water flows in two distinct streams - one steadily, the other freely.  Which feels right for your journey?",
+      choices: ["The steady stream with intention toward a clear destination", "The playful stream that winds and curves wherever it pleases"],
       weights: [
         {judgingScore: 3, perceivingScore: 0},
         {perceivingScore: 3, judgingScore: 0}
       ]
     },
     {
-      question: "In a moonlit clearing, two ancient trees call to you. Which one speaks to your heart?",
+      question: "Your chosen stream leads to a clearing bathed in silver moonlight. Two ancient trees call to you. Which one speaks to your heart?",
       choices: ["Memory Tree with golden leaves of tradition", "Dream Tree with silver branches of possibility"],
       weights: [
         {sensingScore: 3, intuitionScore: 0},
@@ -58,56 +58,56 @@ const LimSimiQuiz = () => {
       ]
     },
     {
-      question: "Stars begin to fall like gentle rain, carrying magical energy. How do you embrace it?",
-      choices: ["Share the magic with other souls", "Cup it close to illuminate your inner world"],
+      question: "As you approach your chosen tree, stars begin to fall like gentle rain, carrying magical energy. How do you embrace it?",
+      choices: ["Reach out to share the magic with any other souls", "Cup it close to your heart, letting itilluminate your inner world"],
       weights: [
         {extrovertScore: 3, introvertScore: 0},
         {introvertScore: 3, extrovertScore: 0}
       ]
     },
     {
-      question: "Ancient stones sing in harmony. Two glow brighter, offering their gifts. Which calls to you?",
-      choices: ["Heart Stone of love and empathy", "Mind Stone of truth and logic"],
+      question: "The starlight guides you to a circle of ancient stones. Two of the stones glow brighter, offering you their unique gifts of wisdom. Which calls to you?",
+      choices: ["The Heart Stone that sings of love, empathy, and human connection", "The Mind Stone that sings of truth, logic, and perfect understanding"],
       weights: [
         {feelingScore: 3, thinkingScore: 0},
         {thinkingScore: 3, feelingScore: 0}
       ]
     },
     {
-      question: "A rainbow path splits in two directions. Which feels true to your nature?",
-      choices: ["Golden Path with clear markers to proven destinations", "Silver Path winding mysteriously to unknown discoveries"],
+      question: "The chosen stone sings to create a shimmering rainbow path that splits in two directions. Which path feels true to your nature?",
+      choices: ["The Golden Path with clear markers to proven destinations", "The Silver Path winding mysteriously to unknown discoveries"],
       weights: [
         {judgingScore: 3, perceivingScore: 0},
         {perceivingScore: 3, judgingScore: 0}
       ]
     },
     {
-      question: "Twin towers rise into the clouds. Which feels like home to your spirit?",
-      choices: ["Community Tower of magical celebration", "Solitude Tower of peaceful, deep magic"],
+      question: "Your path leads to magnificent twin towers rising into the clouds, each pulsing with its unique energy. Which one would you choose?",
+      choices: ["Community Tower that pulses with warm energy & magical celebrations", "Solitude Tower where deep magic is cultivated in peaceful silence"],
       weights: [
         {extrovertScore: 3, introvertScore: 0},
         {introvertScore: 3, extrovertScore: 0}
       ]
     },
     {
-      question: "The Oracle offers to reveal your destiny. How do you wish to learn about yourself?",
-      choices: ["Through stories of others' journeys", "Through visions of magical futures"],
+      question: "Inside your chosen tower, you find an Oracle who smiles knowingly. The Oracle offers to reveal your destiny. How do you wish to learn about yourself?",
+      choices: ["Through stories of how others have walked this path before you", "Through visions of the magical futures that await your discovery"],
       weights: [
         {sensingScore: 3, intuitionScore: 0},
         {intuitionScore: 3, sensingScore: 0}
       ]
     },
     {
-      question: "Two glowing chalices contain different wisdoms. Which resonates with your truest self?",
-      choices: ["Heart-Wisdom of emotional understanding", "Mind-Wisdom of logic and hidden truths"],
+      question: "The Oracle nods approvingly and presents you with two glowing chalices. Choose one that resonates with your truest self?",
+      choices: ["Chalice of Heart: deepens emotional understanding and connection", "Chalice of Mind: sharpens logic and reveals hidden truths"],
       weights: [
         {feelingScore: 3, thinkingScore: 0},
         {thinkingScore: 3, feelingScore: 0}
       ]
     },
     {
-      question: "Two final gateways appear before you. Which represents your magical essence?",
-      choices: ["Steady Gateway of mastery and tradition", "Flowing Gateway of adventure and discovery"],
+      question: "As you drink from your chosen chalice, two final gateways appear before you. Which one represents your magical essence?",
+      choices: ["The Steady Gateway of mastery and tradition", "The Flowing Gateway of adventure and discovery"],
       weights: [
         {judgingScore: 3, perceivingScore: 0},
         {perceivingScore: 3, judgingScore: 0}
@@ -293,11 +293,11 @@ const LimSimiQuiz = () => {
         <div className="star-field"></div>
         <div className="wrapper">
           <header className="header">
-            <h1 className="title">LimSimi</h1>
+            <h1 className="title">LimSimi?</h1>
           </header>
-          <h2 className="subtitle">Discover your Singaporean Drink Companion</h2>
+          <h2 className="subtitle">Discover your Singaporean Drink!</h2>
           <h3 className="description">
-            Embark on a magical journey through the MulTEHverse to uncover your perfect Singaporean drink match
+            Embark on a magical journey to uncover your perfect Singaporean drink match!
           </h3>
           <button 
             className="main-button"
