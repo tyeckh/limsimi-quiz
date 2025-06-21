@@ -42,7 +42,7 @@ const LimSimiQuiz = () => {
       ]
     },
     {
-      question: "Crossing the bridge, you reach the mystical river's edge. The water flows in two distinct streams - one steadily, the other freely.  Which feels right for your journey?",
+      question: "Crossing the bridge, you reach the mystical river's edge. The water flows in two distinct streams.  Which feels right for your journey?",
       choices: ["The steady stream with intention toward a clear destination", "The playful stream that winds and curves wherever it pleases"],
       weights: [
         {judgingScore: 3, perceivingScore: 0},
@@ -66,7 +66,7 @@ const LimSimiQuiz = () => {
       ]
     },
     {
-      question: "The starlight guides you to a circle of ancient stones. Two of the stones glow brighter, offering you their unique gifts of wisdom. Which calls to you?",
+      question: "The starlight guides you to a circle of ancient stones. Two stones glow brighter, offering you their unique gifts of wisdom. Which calls to you?",
       choices: ["The Heart Stone that sings of love, empathy, and human connection", "The Mind Stone that sings of truth, logic, and perfect understanding"],
       weights: [
         {feelingScore: 3, thinkingScore: 0},

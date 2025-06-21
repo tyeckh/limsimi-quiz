@@ -319,7 +319,7 @@
 .question-number {
   position: absolute;
   top: 0px;
-  right: 20px;
+  left: 20px;
   font-size: 1.2rem;
   font-weight: 700;
   color: rgba(255,255,255,0.9);
@@ -342,7 +342,7 @@
   color: white;
   line-height: 1.4;
   text-align: center;
-  margin: 0 0 10px 0;
+  margin: 20px 0 10px 0;
   background: none;
   border: none;
   box-shadow: none;
@@ -352,7 +352,7 @@
 .choices-container {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 16px;
   width: 90%;
   max-width: 400px;
   margin-bottom: 20px;
