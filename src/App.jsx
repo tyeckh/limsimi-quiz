@@ -172,8 +172,8 @@ const LimSimiQuiz = () => {
       percentage: "4%"
     },
     "ESFJ": {
-      name: "Honey Lemon Tea",
-      image: "honey_lemon_tea.png",
+      name: "Honey Lemon",
+      image: "honey_lemon.png",
       percentage: "12%"
     },
     "ISFJ": {
@@ -287,6 +287,13 @@ const LimSimiQuiz = () => {
     );
   };
 
+    // Copyright component
+    const Copyright = () => (
+      <div className="copyright-footer">
+        © 2025 LimSimi by @tyeckh
+      </div>
+    );
+
   if (currentPage === 'home') {
     return (
       <div className="quiz-app home-page">
@@ -301,15 +308,43 @@ const LimSimiQuiz = () => {
           </h3>
           <button 
             className="main-button"
-            onClick={() => setCurrentPage('quiz')}
+            onClick={() => setCurrentPage('intro')}
           >
             Take the quiz
           </button>
         </div>
+        <Copyright />
       </div>
     );
   }
 
+  if (currentPage === 'intro') {
+    return (
+      <div className="quiz-app">
+        <div className="wrapper">
+          <div className="quiz-container">
+            <div className="question">{`You're walking past your favorite hawker center, when you notice something odd - a shimmering puddle. As you lean closer to get a better look...`}</div>
+            
+            <img 
+              src="puddle.png" 
+              alt="Shimmering Portal" 
+              className="question-image"
+            />
+            
+            <div className="choices-container">
+              <button 
+                className="whoosh-button"
+                onClick={() => setCurrentPage('quiz')}
+              >
+                WHOOOSH!
+              </button>
+            </div>
+          </div>
+        </div>
+        <Copyright />
+      </div>
+    );
+  }
   if (currentPage === 'quiz') {
     const currentQuestion = questions[currentQuestionIndex];
     
@@ -341,59 +376,52 @@ const LimSimiQuiz = () => {
             </div>
           </div>
         </div>
+        <Copyright />
       </div>
     );
   }
-
-  if (currentPage === 'results') {
-    const result = window.currentResult || { mbtiType: 'ISFP', drink: drinkResults['ISFP'] };
     
-    return (
-      <div className="quiz-app">
-        <div className="wrapper">
-          <div className="results-container">
-            <h1 className="result-title">Your Drink Spirit Companion</h1>
-            <div className="drink-card">
-              <img 
-                src={result.drink.image} 
-                alt={result.drink.name}
-                className="drink-image"
-              />
-              <h2 className="drink-name">{result.drink.name}</h2>
-              <p className="mbti-type">{result.mbtiType}</p>
-              <p className="percentage">
-                {result.drink.percentage} of people share this drink spirit!
-              </p>
-              <div className="result-message">
-                "Hello, dear friend! I've been waiting so long to meet you. 
-                Your magical journey has revealed that we are perfect companions."
+    if (currentPage === 'results') {
+      const result = window.currentResult || { mbtiType: 'ISFP', drink: drinkResults['ISFP'] };
+      
+      return (
+        <div className="quiz-app results-page">
+          <div className="wrapper">
+            <div className="results-container">
+              <div className="share-header">
+                <div className="share-text">Feel free to share your result!</div>
+                <div className="share-hashtag">#LimSimi</div>
+              </div>
+  
+              <div className="result-card">
+                <img 
+                  src={result.drink.image} 
+                  alt={result.drink.name}
+                  className="drink-result-image"
+                />
+              </div>
+  
+              <div className="button-container">
+                <button 
+                  className="small-button"
+                  onClick={shareQuiz}
+                >
+                  Share Quest
+                </button>
+                <button 
+                  className="small-button"
+                  onClick={resetQuiz}
+                >
+                  Try Again
+                </button>
               </div>
             </div>
-            <div className="button-container">
-              <button 
-                className="small-button"
-                onClick={shareQuiz}
-              >
-                Share Quest
-              </button>
-              <button 
-                className="small-button"
-                onClick={resetQuiz}
-              >
-                Try Again
-              </button>
-            </div>
-            <footer className="footer">
-              Made for mystical drink spirit discovery
-            </footer>
           </div>
+          <Copyright />
         </div>
-      </div>
-    );
-  }
-
-  return null;
-};
+      );
+    }
+}
 
 function App() {
   return <LimSimiQuiz />;
