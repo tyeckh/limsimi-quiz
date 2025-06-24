@@ -84,7 +84,7 @@
 
 .wrapper {
   width: 100%;
-  height: 100svh;
+  min-height: 100svh;
   text-align: center;
   padding: 10px 20px 10px 20px;
   background: none;
@@ -252,11 +252,13 @@
 }
 
 .whoosh-button {
-  font-size: clamp(1.6rem, 5vw, 2rem);
+  font-size: clamp(1rem, 3vw, 1.4rem);
+  padding: 15px 35px;
+  max-width: 240px;
+  min-height: 50px;
   font-weight: 800;
-  padding: 20px 50px;
-  background: linear-gradient(135deg, #4b0069 0%, #3000be 100%);
-  color: white;
+  background: linear-gradient(135deg, #ffd93d 0%, #f7dc6f 100%);
+  color: #2c3e50;
   border: none;
   border-radius: 50px;
   cursor: pointer;
@@ -274,18 +276,25 @@
   align-items: center;
   justify-content: center;
   animation: whoosh-pulse 2s ease-in-out infinite;
+  font-weight: 700;
+  text-transform: none;
+  letter-spacing: 1px;
+  width: auto;
+  box-shadow: 
+  0 10px 30px rgba(255, 217, 61, 0.4),
+  0 0 20px rgba(255, 255, 255, 0.3);
+  animation: button-float 6s ease-in-out infinite;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .whoosh-button:hover {
-  background: linear-gradient(135deg, #4b0069 0%, #3000be 100%);
-  transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 12px 25px rgba(255, 107, 53, 0.4);
+  background: linear-gradient(135deg, #fff176 0%, #f9e79f 100%);
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 
+    0 15px 40px rgba(255, 217, 61, 0.6),
+    0 0 30px rgba(255, 255, 255, 0.5);
 }
 
-@keyframes whoosh-pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.02); }
-}
 /* Regular styles for quiz and results pages */
 .header {
   margin-bottom: 30px;
@@ -352,7 +361,7 @@
 .quiz-container {
   width: 100%;
   max-width: 400px;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   padding: 20px 0px 0px 0px;
@@ -374,16 +383,16 @@
 
 .question-image {
   width: 100%;
-  max-width: 350px;
+  max-width: 320px;
   height: auto;
   object-fit: contain;
-  margin: 0 auto 20px auto;
+  margin: 0 auto 15px auto;
   display: block;
-  border-radius: 15px;
+  border-radius: 5px;
 }
 
 .question {
-  font-size: clamp(1.3rem, 4vw, 1.6rem);
+  font-size: clamp(1.2rem, 4vw, 1.5rem);
   font-weight: 700;
   color: white;
   line-height: 1.4;
@@ -439,7 +448,7 @@
   align-items: center;
   justify-content: flex-start;
   padding: 20px;
-  height: 100vh;
+  min-height: 100vh;
   overflow-y: hidden;
   
 }
@@ -697,4 +706,5 @@
   font-weight: 500;
   z-index: 1000;
   pointer-events: none;
+  margin-top: auto;
 }
