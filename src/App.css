@@ -503,7 +503,187 @@
   min-height: 45px;
   font-family: 'Nunito', sans-serif;
 }
+/* All Drinks page styles */
+.quiz-app.all-drinks-page {
+  background: linear-gradient(135deg, #1a1a3e 0%, #6b5b95 30%, #4a4a7e 70%, #1a1a3e 100%);
+  min-height: 100vh;
+}
 
+.quiz-app.all-drinks-page .wrapper {
+  max-width: 400px;
+  height: 100vh;
+  overflow-y: auto;
+  padding: 15px;
+}
+
+.all-drinks-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 20px;
+}
+
+.page-title {
+  font-size: clamp(2rem, 6vw, 3rem);
+  font-weight: 800;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  margin-bottom: 10px;
+  text-align: center;
+  font-family: 'Nunito', sans-serif;
+}
+
+.page-subtitle {
+  font-size: clamp(1rem, 3vw, 1.3rem);
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 30px;
+  text-align: center;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 500;
+}
+
+.drinks-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.drink-item {
+  background: white;
+  border-radius: 15px;
+  padding: 15px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.drink-item:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+}
+
+.drink-thumbnail {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.drink-item-name {
+  font-size: clamp(0.8rem, 2.2vw, 1rem);
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 5px;
+  font-family: 'Nunito', sans-serif;
+  line-height: 1.2;
+}
+
+.drink-item-type {
+  font-size: clamp(0.7rem, 1.8vw, 0.85rem);
+  font-weight: 600;
+  color: #7f8c8d;
+  margin-bottom: 3px;
+  font-family: 'Nunito', sans-serif;
+}
+
+.drink-item-percentage {
+  font-size: clamp(0.65rem, 1.6vw, 0.75rem);
+  color: #95a5a6;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 500;
+}
+
+.bottom-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.back-button {
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  font-weight: 700;
+  padding: 12px 25px;
+  background: linear-gradient(135deg, #ffd93d 0%, #f7dc6f 100%);
+  color: #2c3e50;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(107, 91, 149, 0.3);
+  font-family: 'Nunito', sans-serif;
+  width: 100%;
+}
+
+.back-button:hover {
+  background: linear-gradient(135deg, #fff176 0%, #f9e79f 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(255, 217, 61, 0.4);
+}
+
+.try-again-button {
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  font-weight: 700;
+  padding: 12px 25px;
+  background: linear-gradient(135deg, #ffd93d 0%, #f7dc6f 100%);
+  color: #2c3e50;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(18, 16, 11, 0.3);
+  font-family: 'Nunito', sans-serif;
+  width: 100%;
+}
+
+.try-again-button:hover {
+  background: linear-gradient(135deg, #fff176 0%, #f9e79f 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(255, 217, 61, 0.4);
+}
+
+/* Responsive adjustments for larger screens */
+@media (min-width: 768px) {
+  .quiz-app.all-drinks-page .wrapper {
+    max-width: 600px;
+  }
+  
+  .drinks-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  
+  .drink-thumbnail {
+    width: 90px;
+    height: 90px;
+  }
+  
+  .bottom-buttons {
+    flex-direction: row;
+    max-width: 400px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .quiz-app.all-drinks-page .wrapper {
+    max-width: 800px;
+  }
+  
+  .drinks-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+  }
+  
+  .drink-thumbnail {
+    width: 100px;
+    height: 100px;
+  }
+}
 /* Copyright footer for all pages */
 .copyright-footer {
   position: fixed;

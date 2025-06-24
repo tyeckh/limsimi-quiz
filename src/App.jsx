@@ -134,81 +134,97 @@ const LimSimiQuiz = () => {
     "ENTJ": {
       name: "Teh C Kosong",
       image: "teh_c_kosong.png",
+      thumbnail: "teh_c_kosong_thumbnail.png",
       percentage: "3%"
     },
     "INTJ": {
       name: "Kopi Gao",
       image: "kopi_gao.png",
+      thumbnail: "kopi_gao_thumbnail.png",
       percentage: "2%"
     },
     "ENTP": {
       name: "Soursop Juice",
-      image: "soursop_juice.png",
+      image: "soursop_juice.png", 
+      thumbnail: "soursop_juice_thumbnail.png",
       percentage: "2%"
     },
     "INTP": {
       name: "Black & White Drink",
       image: "black_white_drink.png",
+      thumbnail: "black_white_drink_thumbnail.png",
       percentage: "3%"
     },
     "ENFJ": {
       name: "Barley Water",
       image: "barley_water.png",
+      thumbnail: "barley_water_thumbnail.png",
       percentage: "2%"
     },
     "INFJ": {
       name: "Chrysanthemum Tea",
       image: "chrysanthemum_tea.png",
+      thumbnail: "chrysanthemum_tea_thumbnail.png",
       percentage: "1%"
     },
     "ENFP": {
       name: "Milo Dinosaur",
       image: "milo_dinosaur.png",
+      thumbnail: "milo_dinosaur_thumbnail.png",
       percentage: "8%"
     },
     "INFP": {
       name: "Bandung",
       image: "bandung.png",
+      thumbnail: "bandung_thumbnail.png",
       percentage: "4%"
     },
     "ESFJ": {
       name: "Honey Lemon",
-      image: "honey_lemon.png",
+      image: "honey_lemon.png", 
+      thumbnail: "honey_lemon_thumbnail.png",
       percentage: "12%"
     },
     "ISFJ": {
       name: "Soy Milk",
       image: "soy_milk.png",
+      thumbnail: "soy_milk_thumbnail.png",
       percentage: "13%"
     },
     "ESTJ": {
       name: "Lime Juice",
-      image: "lime_juice.png",
+      image: "lime_juice.png",  
+      thumbnail: "lime_juice_thumbnail.png",
       percentage: "9%"
     },
     "ISTJ": {
       name: "Kopi O Kosong",
       image: "kopi_o_kosong.png",
+      thumbnail: "kopi_o_kosong_thumbnail.png",
       percentage: "12%"
     },
     "ESTP": {
       name: "Coconut Shake",
       image: "coconut_shake.png",
+      thumbnail: "coconut_shake_thumbnail.png",
       percentage: "4%"
     },
     "ISTP": {
       name: "Sugarcane Juice",
       image: "sugarcane_juice.png",
+      thumbnail: "sugarcane_juice_thumbnail.png",
       percentage: "5%"
     },
     "ESFP": {
       name: "Bubble Tea",
       image: "bubble_tea.png",
+      thumbnail: "bubble_tea_thumbnail.png",
       percentage: "8%"
     },
     "ISFP": {
       name: "Avocado Shake",
       image: "avocado_shake.png",
+      thumbnail: "avocado_shake_thumbnail.png",
       percentage: "9%"
     }
   };
@@ -264,9 +280,17 @@ const LimSimiQuiz = () => {
   };
 
   const shareQuiz = () => {
-    navigator.clipboard.writeText(window.location.href)
-      .then(() => alert('Quiz URL copied to clipboard!'))
-      .catch(err => console.error('Failed to copy URL: ', err));
+    if (navigator.share) {
+      navigator.share({
+        title: 'LimSimi Quiz - Find Your Singapore Drink!',
+        text: `I got ${window.currentResult?.drink.name || 'a drink'}! Find out your Singapore drink spirit!`,
+        url: window.location.href
+      });
+    } else {
+      navigator.clipboard.writeText(window.location.href)
+        .then(() => alert('Quiz URL copied to clipboard!'))
+        .catch(err => console.error('Failed to copy URL: ', err));
+    }
   };
 
   const ProgressBar = ({ current, total }) => {
@@ -285,6 +309,19 @@ const LimSimiQuiz = () => {
         </div>
       </div>
     );
+  };
+
+  
+  const showAllDrinks = () => {
+    setCurrentPage('allDrinks');
+  };
+
+  const showDrinkDetail = (mbtiType) => {
+    window.currentResult = {
+      mbtiType,
+      drink: drinkResults[mbtiType]
+    };
+    setCurrentPage('drinkDetail');
   };
 
     // Copyright component
@@ -389,8 +426,8 @@ const LimSimiQuiz = () => {
           <div className="wrapper">
             <div className="results-container">
               <div className="share-header">
-                <div className="share-text">Feel free to share your result!</div>
-                <div className="share-hashtag">#LimSimi</div>
+                <div className="share-text">Feel free to share your result !</div>
+                <div className="share-hashtag">psst... long press to save your drink card</div>
               </div>
   
               <div className="result-card">
@@ -410,6 +447,56 @@ const LimSimiQuiz = () => {
                 </button>
                 <button 
                   className="small-button"
+                  onClick={showAllDrinks}
+                >
+                  All Drinks
+                </button>
+              </div>
+            </div>
+          </div>
+          <Copyright />
+        </div>
+        );
+    }
+    if (currentPage === 'allDrinks') {
+      const allMBTITypes = Object.keys(drinkResults);
+      
+      return (
+        <div className="quiz-app all-drinks-page">
+          <div className="wrapper">
+            <div className="all-drinks-container">
+              <h1 className="page-title">Kopitiam Menu</h1>
+              <p className="page-subtitle">Discover every personality drink match!</p>
+              
+              <div className="drinks-grid">
+                {allMBTITypes.map((mbtiType) => {
+                  const drink = drinkResults[mbtiType];
+                  return (
+                    <div 
+                      key={mbtiType}
+                      className="drink-item"
+                      onClick={() => showDrinkDetail(mbtiType)}
+                    >
+                      <img 
+                        src={drink.thumbnail} 
+                        alt={drink.name}
+                        className="drink-thumbnail"
+                      />
+                      <h3 className="drink-item-name">{drink.name}</h3>
+                    </div>
+                  );
+                })}
+              </div>
+              
+              <div className="bottom-buttons">
+                <button 
+                  className="back-button"
+                  onClick={() => setCurrentPage('results')}
+                >
+                  ← Back to Results
+                </button>
+                <button 
+                  className="try-again-button"
                   onClick={resetQuiz}
                 >
                   Try Again
@@ -421,6 +508,40 @@ const LimSimiQuiz = () => {
         </div>
       );
     }
+    if (currentPage === 'drinkDetail') {
+      const result = window.currentResult || { mbtiType: 'ISFP', drink: drinkResults['ISFP'] };
+      
+      return (
+        <div className="quiz-app results-page">
+          <div className="wrapper">
+            <div className="results-container">
+              <div className="share-header">
+                <div className="share-text">Drink Details</div>
+              </div>
+  
+              <div className="result-card">
+                <img 
+                  src={result.drink.image} 
+                  alt={result.drink.name}
+                  className="drink-result-image"
+                />
+              </div>
+  
+              <div className="button-container">
+                <button 
+                  className="small-button"
+                  onClick={() => setCurrentPage('allDrinks')}
+                >
+                  ← All Drinks
+                </button>
+              </div>
+            </div>
+          </div>
+          <Copyright />
+        </div>
+      );
+    }
+
 }
 
 function App() {
