@@ -115,99 +115,83 @@ const LimSimiQuiz = () => {
   const drinkResults = {
     "ENTJ": {
       name: "Teh C Kosong",
-      image: "teh_c_kosong.png",
-      thumbnail: "teh_c_kosong_thumbnail.png",
-      percentage: "3%"
+      image: "DrinkCards/teh_c_kosong.png",
+      thumbnail: "Thumbnails/teh_c_kosong_thumbnail.png"
     },
     "INTJ": {
       name: "Kopi Gao",
-      image: "kopi_gao.png",
-      thumbnail: "kopi_gao_thumbnail.png",
-      percentage: "2%"
+      image: "DrinkCards/kopi_gao.png",
+      thumbnail: "Thumbnails/kopi_gao_thumbnail.png"
     },
     "ENTP": {
       name: "Soursop Juice",
-      image: "soursop_juice.png", 
-      thumbnail: "soursop_juice_thumbnail.png",
-      percentage: "2%"
+      image: "DrinkCards/soursop_juice.png", 
+      thumbnail: "Thumbnails/soursop_juice_thumbnail.png"
     },
     "INTP": {
       name: "Black & White Drink",
-      image: "black_white_drink.png",
-      thumbnail: "black_white_drink_thumbnail.png",
-      percentage: "3%"
+      image: "DrinkCards/black_white_drink.png",
+      thumbnail: "Thumbnails/black_white_drink_thumbnail.png"
     },
     "ENFJ": {
       name: "Barley Water",
-      image: "barley_water.png",
-      thumbnail: "barley_water_thumbnail.png",
-      percentage: "2%"
+      image: "DrinkCards/barley_water.png",
+      thumbnail: "Thumbnails/barley_water_thumbnail.png"
     },
     "INFJ": {
       name: "Chrysanthemum Tea",
-      image: "chrysanthemum_tea.png",
-      thumbnail: "chrysanthemum_tea_thumbnail.png",
-      percentage: "1%"
+      image: "DrinkCards/chrysanthemum_tea.png",
+      thumbnail: "Thumbnails/chrysanthemum_tea_thumbnail.png"
     },
     "ENFP": {
       name: "Milo Dinosaur",
-      image: "milo_dinosaur.png",
-      thumbnail: "milo_dinosaur_thumbnail.png",
-      percentage: "8%"
+      image: "DrinkCards/milo_dinosaur.png",
+      thumbnail: "Thumbnails/milo_dinosaur_thumbnail.png"
     },
     "INFP": {
       name: "Bandung",
-      image: "bandung.png",
-      thumbnail: "bandung_thumbnail.png",
-      percentage: "4%"
+      image: "DrinkCards/bandung.png",
+      thumbnail: "Thumbnails/bandung_thumbnail.png"
     },
     "ESFJ": {
       name: "Honey Lemon",
-      image: "honey_lemon.png", 
-      thumbnail: "honey_lemon_thumbnail.png",
-      percentage: "12%"
+      image: "DrinkCards/honey_lemon.png", 
+      thumbnail: "Thumbnails/honey_lemon_thumbnail.png"
     },
     "ISFJ": {
       name: "Soy Milk",
-      image: "soy_milk.png",
-      thumbnail: "soy_milk_thumbnail.png",
-      percentage: "13%"
+      image: "DrinkCards/soy_milk.png",
+      thumbnail: "Thumbnails/soy_milk_thumbnail.png"
     },
     "ESTJ": {
       name: "Lime Juice",
-      image: "lime_juice.png",  
-      thumbnail: "lime_juice_thumbnail.png",
-      percentage: "9%"
+      image: "DrinkCards/lime_juice.png",  
+      thumbnail: "Thumbnails/lime_juice_thumbnail.png"
     },
     "ISTJ": {
       name: "Kopi O Kosong",
-      image: "kopi_o_kosong.png",
-      thumbnail: "kopi_o_kosong_thumbnail.png",
-      percentage: "12%"
+      image: "DrinkCards/kopi_o_kosong.png",
+      thumbnail: "Thumbnails/kopi_o_kosong_thumbnail.png"
     },
     "ESTP": {
       name: "Coconut Shake",
-      image: "coconut_shake.png",
-      thumbnail: "coconut_shake_thumbnail.png",
-      percentage: "4%"
+      image: "DrinkCards/coconut_shake.png",
+      thumbnail: "Thumbnails/coconut_shake_thumbnail.png"
     },
     "ISTP": {
       name: "Sugarcane Juice",
-      image: "sugarcane_juice.png",
-      thumbnail: "sugarcane_juice_thumbnail.png",
-      percentage: "5%"
+      image: "DrinkCards/sugarcane_juice.png",
+      thumbnail: "Thumbnails/sugarcane_juice_thumbnail.png"
     },
     "ESFP": {
       name: "Bubble Tea",
-      image: "bubble_tea.png",
-      thumbnail: "bubble_tea_thumbnail.png",
-      percentage: "8%"
+      image: "DrinkCards/bubble_tea.png",
+      thumbnail: "Thumbnails/bubble_tea_thumbnail.png"
     },
     "ISFP": {
       name: "Avocado Shake",
-      image: "avocado_shake.png",
-      thumbnail: "avocado_shake_thumbnail.png",
-      percentage: "9%"
+      image: "DrinkCards/avocado_shake.png",
+      thumbnail: "Thumbnails/avocado_shake_thumbnail.png" 
     }
   };
 

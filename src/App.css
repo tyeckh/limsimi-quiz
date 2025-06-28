@@ -441,7 +441,7 @@
   box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
 
-/* Results page styles - inspired by Cosmos Persona design */
+/* Results page styles */
 .results-container {
   display: flex;
   flex-direction: column;
@@ -695,7 +695,7 @@
 }
 /* Copyright footer for all pages */
 .copyright-footer {
-  position: fixed;
+  position: absolute;
   bottom: 10px;
   left: 0;
   right: 0;
