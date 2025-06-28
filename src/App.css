@@ -112,6 +112,15 @@
   margin: 0;
 }
 
+.click-hint {
+  font-size: clamp(1rem, 3vw, 1.3rem);
+  color: #ffd93d;
+  margin-bottom: 20px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  animation: pulse-hint 1.5s ease-in-out infinite;
+}
+
 /*---------------------------------------------------*/
 
 .quiz-app {

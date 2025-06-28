@@ -17,8 +17,9 @@ const LimSimiQuiz = () => {
 
   /*For testing, to remove once done*/
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [titleClickCount, setTitleClickCount] = useState(0);
   const [isValidated, setIsValidated] = useState(false);
-  const validTesterCodes = ["BATOCKS","KYSUCKS"];
+  const validTesterCodes = ["BATOCKS", "KYSUCKS"];
 
   const handleTesterCodeSubmit = (e) => {
     e.preventDefault();
@@ -31,13 +32,43 @@ const LimSimiQuiz = () => {
     }
   };
 
+  const handleTitleClick = () => {
+    const newCount = titleClickCount + 1;
+    setTitleClickCount(newCount);
+
+    if (newCount >= 15) {
+      setIsValidated(true);
+      setCurrentPage("home");
+      setTimeout(() => {
+        alert("🎉 Secret access unlocked! Welcome to LimSimi! 🥤");
+      }, 100);
+    }
+  };
+
   // If not validated, show validation page for all attempts to navigate
   if (!isValidated) {
     return (
       <div className="quiz-app validation-page">
         <div className="wrapper">
           <div className="validation-container">
-            <h1 className="validation-title">LimSimi Quiz</h1>
+            <h1
+              className="validation-title clickable-title"
+              onClick={handleTitleClick}
+              style={{ cursor: "pointer" }}
+            >
+              LimSimi Quiz
+            </h1>
+
+            {titleClickCount > 4 && titleClickCount < 6 && (
+              <div className="click-hint">
+                Woah are you sure about this? 🤔
+              </div>
+            )}
+            {titleClickCount > 8 && titleClickCount < 15 && (
+              <div className="click-hint">
+                🤫 {titleClickCount} clicks... keep going!
+              </div>
+            )}
             <div className="validation-card">
               <h2 className="validation-subtitle">Beta Testing Access</h2>
               <p className="validation-description">
@@ -346,46 +377,51 @@ const LimSimiQuiz = () => {
 
   const shareQuiz = async () => {
     const result = window.currentResult;
-    const drinkName = result?.drink.name || 'my drink';
-    
+    const drinkName = result?.drink.name || "my drink";
+
     const customMessage = `✨Wah! I'm ${drinkName} in the LimSimi Quiz!🥤 Come and find out your Singapore drink match! 🇸🇬 ${window.location.href}`;
-  
+
     // Check if native share with files is supported
     if (navigator.share && navigator.canShare) {
       try {
         // Fetch the image as a blob
         const response = await fetch(result.drink.image);
         const blob = await response.blob();
-        
+
         // Create a file from the blob
-        const file = new File([blob], `${drinkName.replace(/\s+/g, '_')}.png`, {
+        const file = new File([blob], `${drinkName.replace(/\s+/g, "_")}.png`, {
           type: blob.type,
         });
-  
+
         // Check if sharing files is supported
         if (navigator.canShare({ files: [file] })) {
           await navigator.share({
-            title: '🍵 LimSimi Quiz - My Singapore Drink!',
+            title: "🍵 LimSimi Quiz - My Singapore Drink!",
             text: customMessage,
-            files: [file]
+            files: [file],
           });
           return;
         }
       } catch (error) {
-        console.log('File sharing not supported, falling back to text only');
+        console.log("File sharing not supported, falling back to text only");
       }
     }
-  
+
     // Fallback: Text only
     if (navigator.share) {
       navigator.share({
-        title: '🍵 LimSimi Quiz - My Singapore Drink!',
-        text: customMessage
+        title: "🍵 LimSimi Quiz - My Singapore Drink!",
+        text: customMessage,
       });
     } else {
-      navigator.clipboard.writeText(customMessage)
-        .then(() => alert('Message copied to clipboard! 📋\n\nTip: Long press your drink card above to save the image separately!'))
-        .catch(err => console.error('Failed to copy: ', err));
+      navigator.clipboard
+        .writeText(customMessage)
+        .then(() =>
+          alert(
+            "Message copied to clipboard! 📋\n\nTip: Long press your drink card above to save the image separately!"
+          )
+        )
+        .catch((err) => console.error("Failed to copy: ", err));
     }
   };
 
