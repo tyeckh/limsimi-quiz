@@ -344,20 +344,52 @@ const LimSimiQuiz = () => {
     setCurrentPage("home");
   };
 
-  const shareQuiz = () => {
+  const shareQuiz = async () => {
+    const result = window.currentResult;
+    const drinkName = result?.drink.name || 'my drink';
+    
+    const customMessage = `Wah! I'm ${drinkName} in the LimSimi Quiz! 🥤
+  
+  Come and find out your singapore drink match!
+  
+  ${window.location.href}`;
+  
+    // Check if native share with files is supported
+    if (navigator.share && navigator.canShare) {
+      try {
+        // Fetch the image as a blob
+        const response = await fetch(result.drink.image);
+        const blob = await response.blob();
+        
+        // Create a file from the blob
+        const file = new File([blob], `${drinkName.replace(/\s+/g, '_')}.png`, {
+          type: blob.type,
+        });
+  
+        // Check if sharing files is supported
+        if (navigator.canShare({ files: [file] })) {
+          await navigator.share({
+            title: '🍵 LimSimi Quiz - My Singapore Drink!',
+            text: customMessage,
+            files: [file]
+          });
+          return;
+        }
+      } catch (error) {
+        console.log('File sharing not supported, falling back to text only');
+      }
+    }
+  
+    // Fallback: Text only
     if (navigator.share) {
       navigator.share({
-        title: "LimSimi Quiz - Find Your Singapore Drink!",
-        text: `I got ${
-          window.currentResult?.drink.name || "a drink"
-        }! Find out your Singapore drink match!`,
-        url: window.location.href,
+        title: '🍵 LimSimi Quiz - My Singapore Drink!',
+        text: customMessage
       });
     } else {
-      navigator.clipboard
-        .writeText(window.location.href)
-        .then(() => alert("Quiz URL copied to clipboard!"))
-        .catch((err) => console.error("Failed to copy URL: ", err));
+      navigator.clipboard.writeText(customMessage)
+        .then(() => alert('Message copied to clipboard! 📋\n\nTip: Long press your drink card above to save the image separately!'))
+        .catch(err => console.error('Failed to copy: ', err));
     }
   };
 
