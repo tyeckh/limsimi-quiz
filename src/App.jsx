@@ -348,11 +348,7 @@ const LimSimiQuiz = () => {
     const result = window.currentResult;
     const drinkName = result?.drink.name || 'my drink';
     
-    const customMessage = `Wah! I'm ${drinkName} in the LimSimi Quiz! 🥤
-  
-  Come and find out your singapore drink match!
-  
-  ${window.location.href}`;
+    const customMessage = `✨Wah! I'm ${drinkName} in the LimSimi Quiz!🥤 Come and find out your Singapore drink match! 🇸🇬 ${window.location.href}`;
   
     // Check if native share with files is supported
     if (navigator.share && navigator.canShare) {
