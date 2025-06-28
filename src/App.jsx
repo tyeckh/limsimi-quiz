@@ -18,7 +18,7 @@ const LimSimiQuiz = () => {
   /*For testing, to remove once done*/
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [isValidated, setIsValidated] = useState(false);
-  const validTesterCodes = ["BATOCKS"];
+  const validTesterCodes = ["BATOCKS","KYSUCKS"];
 
   const handleTesterCodeSubmit = (e) => {
     e.preventDefault();
