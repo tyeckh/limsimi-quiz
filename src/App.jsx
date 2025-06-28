@@ -129,7 +129,7 @@ const LimSimiQuiz = () => {
       thumbnail: "Thumbnails/soursop_juice_thumbnail.png"
     },
     "INTP": {
-      name: "Black & White Drink",
+      name: "Black & White",
       image: "DrinkCards/black_white_drink.png",
       thumbnail: "Thumbnails/black_white_drink_thumbnail.png"
     },
@@ -159,9 +159,9 @@ const LimSimiQuiz = () => {
       thumbnail: "Thumbnails/honey_lemon_thumbnail.png"
     },
     "ISFJ": {
-      name: "Soy Milk",
-      image: "DrinkCards/soy_milk.png",
-      thumbnail: "Thumbnails/soy_milk_thumbnail.png"
+      name: "Soya Milk",
+      image: "DrinkCards/soya_milk.png",
+      thumbnail: "Thumbnails/soya_milk_thumbnail.png"
     },
     "ESTJ": {
       name: "Lime Juice",
