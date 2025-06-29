@@ -289,7 +289,6 @@ const LimSimiQuiz = () => {
     "ancient_recipes.webp",
     "mystical_lab.webp",
     "orchard_road.webp",
-    "tea_masters.webp",
     "floating_crystals.webp",
   ];
 
@@ -576,7 +575,7 @@ const LimSimiQuiz = () => {
             <div className="question">{`You're walking past your favorite hawker center when you notice an uncle at a mysterious stall you've never seen before. His sign reads "Mystical Drinks - Find Your True Taste." As you approach, he winks and the world shimmers...`}</div>
 
             <img
-              src="uncle_wink.png"
+              src="uncle_wink.webp"
               alt="Uncle winking at mysterious stall"
               className="question-image"
             />
@@ -647,7 +646,7 @@ const LimSimiQuiz = () => {
             </div>
 
             <img
-              src="ending_uncle.png"
+              src="ending_uncle.webp"
               alt="Uncle preparing your destined drink"
               className="question-image"
             />
