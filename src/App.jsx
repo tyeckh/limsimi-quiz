@@ -1,5 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./App.css";
+
+// Google Analytics event helper
+const sendGtagEvent = (action, params = {}) => {
+  if (window.gtag) {
+    window.gtag("event", action, params);
+  }
+};
+
+// Device/platform info helper
+const getDeviceInfo = () => {
+  const ua = navigator.userAgent;
+  let deviceType = "desktop";
+  if (/Mobi|Android/i.test(ua)) deviceType = "mobile";
+  else if (/iPad|Tablet/i.test(ua)) deviceType = "tablet";
+  return {
+    device_type: deviceType,
+    user_agent: ua,
+    platform: navigator.platform,
+  };
+};
 
 const LimSimiQuiz = () => {
   const [currentPage, setCurrentPage] = useState("validation"); //'home'
@@ -15,11 +35,30 @@ const LimSimiQuiz = () => {
     feelingScore: 0,
   });
 
+  // Track quiz start time
+  const quizStartTime = useRef(null);
+  // Track question start time for time per question (optional, not sent yet)
+  const questionStartTime = useRef(null);
+  // Track if landing page event has fired
+  const landingPageTracked = useRef(false);
+
+  // Fire landing page event once per session
+  useEffect(() => {
+    if (currentPage === "home" && !landingPageTracked.current) {
+      sendGtagEvent("landing_page_visit", {
+        event_category: "funnel",
+        event_label: "Landing Page",
+        ...getDeviceInfo(),
+      });
+      landingPageTracked.current = true;
+    }
+  }, [currentPage]);
+
   /*For testing, to remove once done*/
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [titleClickCount, setTitleClickCount] = useState(0);
   const [isValidated, setIsValidated] = useState(false);
-  const validTesterCodes = ["BATOCKS", "KYSUCKS","HARLOTESTING"];
+  const validTesterCodes = ["BATOCKS", "KYSUCKS", "HARLOTESTING"];
 
   const handleTesterCodeSubmit = (e) => {
     e.preventDefault();
@@ -60,9 +99,7 @@ const LimSimiQuiz = () => {
             </h1>
 
             {titleClickCount > 2 && titleClickCount < 5 && (
-              <div className="click-hint">
-                Woah are you sure about this? 🤔
-              </div>
+              <div className="click-hint">Woah are you sure about this? 🤔</div>
             )}
             {titleClickCount > 5 && titleClickCount < 15 && (
               <div className="click-hint">
@@ -103,6 +140,18 @@ const LimSimiQuiz = () => {
     );
   }
   /*---------------------------------------------------*/
+
+  // When quiz starts, set quizStartTime and fire event
+  const handleQuizStart = () => {
+    quizStartTime.current = Date.now();
+    questionStartTime.current = Date.now();
+    sendGtagEvent("quiz_start", {
+      event_category: "funnel",
+      event_label: "Quiz Started",
+      ...getDeviceInfo(),
+    });
+    setCurrentPage("intro");
+  };
 
   // Updated questions with new storyline
   const questions = [
@@ -229,16 +278,16 @@ const LimSimiQuiz = () => {
   ];
 
   const questionImages = [
-    "mystical_shop.png",
-    "mahjong_aunties.png",
-    "merlion_quiz.png",
-    "mrt_choice.png",
-    "supertrees.png",
-    "ancient_recipes.png",
-    "mystical_lab.png",
-    "orchard_road.png",
-    "tea_masters.png",
-    "floating_crystals.png",
+    "mystical_shop.webp",
+    "mahjong_aunties.webp",
+    "merlion_quiz.webp",
+    "mrt_choice.webp",
+    "supertrees.webp",
+    "ancient_recipes.webp",
+    "mystical_lab.webp",
+    "orchard_road.webp",
+    "tea_masters.webp",
+    "floating_crystals.webp",
   ];
 
   const drinkResults = {
@@ -328,6 +377,22 @@ const LimSimiQuiz = () => {
     const currentQuestion = questions[currentQuestionIndex];
     const selectedWeight = currentQuestion.weights[choiceIndex];
 
+    // Track question response event
+    const now = Date.now();
+    let timeSpent = null;
+    if (questionStartTime.current) {
+      timeSpent = Math.round((now - questionStartTime.current) / 1000); // seconds
+    }
+    sendGtagEvent("question_answered", {
+      event_category: "quiz",
+      event_label: `Question ${currentQuestionIndex + 1}`,
+      question_index: currentQuestionIndex + 1,
+      choice_index: choiceIndex,
+      time_spent: timeSpent,
+      ...getDeviceInfo(),
+    });
+    questionStartTime.current = now;
+
     setScores((prevScores) => {
       const newScores = { ...prevScores };
       Object.keys(selectedWeight).forEach((key) => {
@@ -358,6 +423,20 @@ const LimSimiQuiz = () => {
       mbtiType,
       drink: drinkResults[mbtiType],
     };
+    // Fire quiz complete event
+    const endTime = Date.now();
+    let duration = null;
+    if (quizStartTime.current) {
+      duration = Math.round((endTime - quizStartTime.current) / 1000); // seconds
+    }
+    sendGtagEvent("quiz_complete", {
+      event_category: "funnel",
+      event_label: "Quiz Completed",
+      mbti_type: mbtiType,
+      drink_name: drinkResults[mbtiType]?.name,
+      completion_time: duration,
+      ...getDeviceInfo(),
+    });
   };
 
   const resetQuiz = () => {
@@ -373,10 +452,25 @@ const LimSimiQuiz = () => {
       feelingScore: 0,
     });
     setCurrentPage("home");
+    // Fire try again event
+    sendGtagEvent("quiz_try_again", {
+      event_category: "engagement",
+      event_label: "Try Again",
+      ...getDeviceInfo(),
+    });
+    // Reset quiz start time for next attempt
+    quizStartTime.current = null;
+    questionStartTime.current = null;
   };
 
   const shareQuiz = async () => {
     const result = window.currentResult;
+    sendGtagEvent("share_quest", {
+      event_category: "engagement",
+      event_label: "Share Quest Button",
+      mbti_type: result?.mbtiType,
+      drink_name: result?.drink?.name,
+    });
     const drinkName = result?.drink.name || "my drink";
 
     const customMessage = `✨Wah! I'm ${drinkName} in the LimSimi Quiz!🥤 Come and find out your Singapore drink match! 🇸🇬 ${window.location.href}`;
@@ -426,6 +520,13 @@ const LimSimiQuiz = () => {
   };
 
   const showAllDrinks = () => {
+    const result = window.currentResult;
+    sendGtagEvent("view_all_drinks", {
+      event_category: "navigation",
+      event_label: "All Drinks Button",
+      mbti_type: result?.mbtiType,
+      drink_name: result?.drink?.name,
+    });
     setCurrentPage("allDrinks");
   };
 
@@ -455,10 +556,7 @@ const LimSimiQuiz = () => {
             Embark on a magical journey to uncover your perfect Singaporean
             drink match!
           </h3>
-          <button
-            className="main-button"
-            onClick={() => setCurrentPage("intro")}
-          >
+          <button className="main-button" onClick={handleQuizStart}>
             Take the quiz
           </button>
         </div>
@@ -572,6 +670,8 @@ const LimSimiQuiz = () => {
       drink: drinkResults["ISFP"],
     };
 
+    const longPressTimer = useRef(null);
+
     return (
       <div className="quiz-app results-page">
         <div className="wrapper">
@@ -588,6 +688,38 @@ const LimSimiQuiz = () => {
                 src={result.drink.image}
                 alt={result.drink.name}
                 className="drink-result-image"
+                onClick={() => {
+                  sendGtagEvent("click_drink_image", {
+                    event_category: "engagement",
+                    event_label: "Drink Image Clicked",
+                    mbti_type: result?.mbtiType,
+                    drink_name: result?.drink?.name,
+                  });
+                }}
+                onContextMenu={() => {
+                  sendGtagEvent("contextmenu_drink_image", {
+                    event_category: "engagement",
+                    event_label: "Drink Image Right-Click",
+                    mbti_type: result?.mbtiType,
+                    drink_name: result?.drink?.name,
+                  });
+                }}
+                onTouchStart={() => {
+                  longPressTimer.current = setTimeout(() => {
+                    sendGtagEvent("longpress_drink_image", {
+                      event_category: "engagement",
+                      event_label: "Drink Image Long-Press",
+                      mbti_type: result?.mbtiType,
+                      drink_name: result?.drink?.name,
+                    });
+                  }, 600); // 600ms = long press
+                }}
+                onTouchEnd={() => {
+                  clearTimeout(longPressTimer.current);
+                }}
+                onTouchMove={() => {
+                  clearTimeout(longPressTimer.current);
+                }}
               />
             </div>
 
@@ -675,6 +807,14 @@ const LimSimiQuiz = () => {
                 src={result.drink.image}
                 alt={result.drink.name}
                 className="drink-result-image"
+                onContextMenu={() => {
+                  sendGtagEvent("contextmenu_drink_image", {
+                    event_category: "engagement",
+                    event_label: "Drink Image Right-Click",
+                    mbti_type: result?.mbtiType,
+                    drink_name: result?.drink?.name,
+                  });
+                }}
               />
             </div>
 
