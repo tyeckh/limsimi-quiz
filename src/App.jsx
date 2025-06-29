@@ -220,7 +220,7 @@ const LimSimiQuiz = () => {
       question:
         "Drawn by whispers from the Supertrees, you step into Haji Lane where glowing murals pulse with hidden flavors and secret ingredients, waiting for you to choose the one that speaks to you.",
       choices: [
-        "Let my intuition lead me from one mural to the next and see what unfolds.",
+        "Let my intuition lead me from mural to mural and see what unfolds.",
         "Systematically go through each mural to ensure nothing is missed.",
       ],
       weights: [
@@ -475,7 +475,7 @@ const LimSimiQuiz = () => {
     });
     const drinkName = result?.drink.name || "my drink";
 
-    const customMessage = `✨Wah! I'm ${drinkName} in the LimSimi Quiz!🥤 Come and find out your Singapore drink match! 🇸🇬 ${window.location.href}`;
+    const customMessage = `✨Wah! I'm ${drinkName} in the LimSimi Quiz!🥤 Come and find out your Singapore drink match! 🇸🇬\n${window.location.href}`;
 
     // Check if native share with files is supported
     if (navigator.share && navigator.canShare) {
@@ -783,7 +783,6 @@ const LimSimiQuiz = () => {
             </div>
           </div>
         </div>
-        <Copyright />
       </div>
     );
   }
