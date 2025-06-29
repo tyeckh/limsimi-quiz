@@ -41,6 +41,7 @@ const LimSimiQuiz = () => {
   const questionStartTime = useRef(null);
   // Track if landing page event has fired
   const landingPageTracked = useRef(false);
+  const longPressTimer = useRef(null);
 
   // Fire landing page event once per session
   useEffect(() => {
@@ -163,8 +164,8 @@ const LimSimiQuiz = () => {
         "I prefer the quiet door - let me explore at my own pace.",
       ],
       weights: [
-        { extrovertScore: 3, introvertScore: 0 },
-        { introvertScore: 3, extrovertScore: 0 },
+        { extrovertScore: 2, perceivingScore: 1 },
+        { introvertScore: 2, judgingScore: 1 },
       ],
     },
     {
@@ -175,56 +176,68 @@ const LimSimiQuiz = () => {
         "Those visions of future Singapore fascinate me, Let's check it out!",
       ],
       weights: [
-        { sensingScore: 3, intuitionScore: 0 },
-        { intuitionScore: 3, sensingScore: 0 },
+        { sensingScore: 2, feelingScore: 1 },
+        { intuitionScore: 2, thinkingScore: 1 },
       ],
     },
     {
       question:
         'Following the aunties\' directions, you reach Marina Bay where the Merlion statue glows and speaks: "solve this riddle: A kopitiam uncle has 100 thirsty customers but only 80 cups. How does he handle this?"',
       choices: [
-        "Calculate the most efficient way - share cups or find alternatives.",
-        "Talk to customers about their needs - some might share or wait happily!",
+        "Calculate and plan a fair, efficient way to distribute or find alternatives.",
+        "Talk to the customers, some may be ok to wait or share if they feel heard.",
       ],
       weights: [
-        { thinkingScore: 3, feelingScore: 0 },
-        { feelingScore: 3, thinkingScore: 0 },
+        { thinkingScore: 2, judgingScore: 1 },
+        { feelingScore: 2, perceivingScore: 1 },
       ],
     },
     {
       question:
-        'You teleported to a magical MRT train. The announcement says: "Next stop, Your Destiny." Two buttons appear: "Express" and "Scenic Route."',
+        'You teleported to a magical MRT train. The announcement says: "Next stop, Your Destiny". Two buttons appear: <Express> and <Scenic Route>',
       choices: [
         "Express please! I want to reach my destination efficiently.",
         "Scenic route sounds interesting - let's see where it takes me!",
       ],
       weights: [
-        { judgingScore: 3, perceivingScore: 0 },
-        { perceivingScore: 3, judgingScore: 0 },
+        { judgingScore: 2, intuitionScore: 1 },
+        { perceivingScore: 2, sensingScore: 1 },
       ],
     },
     {
       question:
         'The MRT drops you at ethereal Gardens by the Bay, where the Supertrees grow magical fruits. A gardenkeeper asks: "How will you harvest your drink ingredients?"',
       choices: [
-        "I'll join the group harvest - to share discoveries and learn from others!",
-        "I'll harvest alone to connect deeply with each flavor before choosing.",
+        "I'll join the group harvest, to share discoveries and learn from others!",
+        "I'll harvest alone to focus deeply and make objective choices.",
       ],
       weights: [
-        { extrovertScore: 3, introvertScore: 0 },
-        { introvertScore: 3, extrovertScore: 0 },
+        { extrovertScore: 2, thinkingScore: 1 },
+        { introvertScore: 2, feelingScore: 1 },
       ],
     },
     {
       question:
-        'Following the trail, you discover a mystical kopitiam where an ancient coffee master guards a recipe vault. "Young seeker," he says, "which brewing wisdom calls to you?"',
+        "Drawn by whispers from the Supertrees, you step into Haji Lane where glowing murals pulse with hidden flavors and secret ingredients, waiting for you to choose the one that speaks to you.",
       choices: [
-        "I trust the traditional method passed down through generations.",
-        "Let's try that experimental fusion technique - what new flavors await?",
+        "Let my intuition lead me from one mural to the next and see what unfolds.",
+        "Systematically go through each mural to ensure nothing is missed.",
       ],
       weights: [
-        { sensingScore: 3, intuitionScore: 0 },
-        { intuitionScore: 3, sensingScore: 0 },
+        { perceivingScore: 2, intuitionScore: 1 },
+        { judgingScore: 2, sensingScore: 1 },
+      ],
+    },
+    {
+      question:
+        'As you pick your ingredient from the mural, the wall shimmers and you fall through into a mystical kopitiam where an ancient coffee master guards a recipe vault. "Young seeker," he says, "which brewing wisdom calls to you?"',
+      choices: [
+        "I trust traditional recipes, they've worked for generations and give structure to the process.",
+        "Let's try that experimental fusion technique, I'm curious what new flavours we can invent.",
+      ],
+      weights: [
+        { sensingScore: 2, judgingScore: 1 },
+        { intuitionScore: 2, perceivingScore: 1 },
       ],
     },
     {
@@ -235,8 +248,8 @@ const LimSimiQuiz = () => {
         "I'll taste and adjust based on how each sip makes me feel!",
       ],
       weights: [
-        { thinkingScore: 3, feelingScore: 0 },
-        { feelingScore: 3, thinkingScore: 0 },
+        { thinkingScore: 2, judgingScore: 1 },
+        { feelingScore: 2, perceivingScore: 1 },
       ],
     },
     {
@@ -247,35 +260,24 @@ const LimSimiQuiz = () => {
         "I want a flexible recipe guide that lets people improvise and experiment!",
       ],
       weights: [
-        { judgingScore: 3, perceivingScore: 0 },
-        { perceivingScore: 3, judgingScore: 0 },
+        { judgingScore: 2, sensingScore: 1 },
+        { perceivingScore: 2, intuitionScore: 1 },
       ],
     },
     {
       question:
-        "A portal brings you to a mystical Chinatown where ancient tea masters conducts a ceremony for your golden scroll. How do you wish to receive their blessing?",
+        'Emerging from the ceremony, you find yourself in a crystal chamber, where two floating crystals await. A voice echoes: "Choose the crystal that will seal your drink\'s true nature."',
       choices: [
-        "I'll join the circle and receive the blessing together with other seekers!",
-        "I'd prefer a private blessing to focus deeply on the ceremony's meaning.",
+        "The steady crystal — timeless and dependable, with grounded flavour.",
+        "The shifting crystal — creative and emotional, always evolving.",
       ],
       weights: [
-        { extrovertScore: 3, introvertScore: 0 },
-        { introvertScore: 3, extrovertScore: 0 },
-      ],
-    },
-    {
-      question:
-        'Emerging from the tea ceremony, you find yourself in a crystal chamber, where two floating crystals await. A voice echoes: "Choose the crystal that will seal your drink\'s true nature."',
-      choices: [
-        "The steady crystal that represents reliability and timeless flavor.",
-        "The changing crystal that represents innovation and endless possibilities.",
-      ],
-      weights: [
-        { sensingScore: 3, intuitionScore: 0 },
-        { intuitionScore: 3, sensingScore: 0 },
+        { sensingScore: 2, feelingScore: 1 },
+        { intuitionScore: 2, thinkingScore: 1 },
       ],
     },
   ];
+  
 
   const questionImages = [
     "mystical_shop.webp",
@@ -283,6 +285,7 @@ const LimSimiQuiz = () => {
     "merlion_quiz.webp",
     "mrt_choice.webp",
     "supertrees.webp",
+    "haji_lane.webp",
     "ancient_recipes.webp",
     "mystical_lab.webp",
     "orchard_road.webp",
@@ -294,82 +297,82 @@ const LimSimiQuiz = () => {
     ENTJ: {
       name: "Teh C Kosong",
       image: "DrinkCards/teh_c_kosong.png",
-      thumbnail: "Thumbnails/teh_c_kosong_thumbnail.png",
+      thumbnail: "Thumbnails/teh_c_kosong_thumbnail.webp",
     },
     INTJ: {
       name: "Kopi Gao",
       image: "DrinkCards/kopi_gao.png",
-      thumbnail: "Thumbnails/kopi_gao_thumbnail.png",
+      thumbnail: "Thumbnails/kopi_gao_thumbnail.webp",
     },
     ENTP: {
       name: "Soursop Juice",
       image: "DrinkCards/soursop_juice.png",
-      thumbnail: "Thumbnails/soursop_juice_thumbnail.png",
+      thumbnail: "Thumbnails/soursop_juice_thumbnail.webp",
     },
     INTP: {
       name: "Black & White",
       image: "DrinkCards/black_white_drink.png",
-      thumbnail: "Thumbnails/black_white_drink_thumbnail.png",
+      thumbnail: "Thumbnails/black_white_drink_thumbnail.webp",
     },
     ENFJ: {
       name: "Barley Water",
       image: "DrinkCards/barley_water.png",
-      thumbnail: "Thumbnails/barley_water_thumbnail.png",
+      thumbnail: "Thumbnails/barley_water_thumbnail.webp",
     },
     INFJ: {
       name: "Chrysanthemum Tea",
       image: "DrinkCards/chrysanthemum_tea.png",
-      thumbnail: "Thumbnails/chrysanthemum_tea_thumbnail.png",
+      thumbnail: "Thumbnails/chrysanthemum_tea_thumbnail.webp",
     },
     ENFP: {
       name: "Milo Dinosaur",
       image: "DrinkCards/milo_dinosaur.png",
-      thumbnail: "Thumbnails/milo_dinosaur_thumbnail.png",
+      thumbnail: "Thumbnails/milo_dinosaur_thumbnail.webp",
     },
     INFP: {
       name: "Bandung",
       image: "DrinkCards/bandung.png",
-      thumbnail: "Thumbnails/bandung_thumbnail.png",
+      thumbnail: "Thumbnails/bandung_thumbnail.webp",
     },
     ESFJ: {
       name: "Honey Lemon",
       image: "DrinkCards/honey_lemon.png",
-      thumbnail: "Thumbnails/honey_lemon_thumbnail.png",
+      thumbnail: "Thumbnails/honey_lemon_thumbnail.webp",
     },
     ISFJ: {
       name: "Soya Milk",
       image: "DrinkCards/soya_milk.png",
-      thumbnail: "Thumbnails/soya_milk_thumbnail.png",
+      thumbnail: "Thumbnails/soya_milk_thumbnail.webp",
     },
     ESTJ: {
       name: "Lime Juice",
       image: "DrinkCards/lime_juice.png",
-      thumbnail: "Thumbnails/lime_juice_thumbnail.png",
+      thumbnail: "Thumbnails/lime_juice_thumbnail.webp",
     },
     ISTJ: {
       name: "Kopi O Kosong",
       image: "DrinkCards/kopi_o_kosong.png",
-      thumbnail: "Thumbnails/kopi_o_kosong_thumbnail.png",
+      thumbnail: "Thumbnails/kopi_o_kosong_thumbnail.webp",
     },
     ESTP: {
       name: "Coconut Shake",
       image: "DrinkCards/coconut_shake.png",
-      thumbnail: "Thumbnails/coconut_shake_thumbnail.png",
+      thumbnail: "Thumbnails/coconut_shake_thumbnail.webp",
     },
     ISTP: {
       name: "Sugarcane Juice",
       image: "DrinkCards/sugarcane_juice.png",
-      thumbnail: "Thumbnails/sugarcane_juice_thumbnail.png",
+      thumbnail: "Thumbnails/sugarcane_juice_thumbnail.webp",
     },
     ESFP: {
       name: "Bubble Tea",
       image: "DrinkCards/bubble_tea.png",
-      thumbnail: "Thumbnails/bubble_tea_thumbnail.png",
+      thumbnail: "Thumbnails/bubble_tea_thumbnail.webp",
     },
     ISFP: {
       name: "Avocado Shake",
       image: "DrinkCards/avocado_shake.png",
-      thumbnail: "Thumbnails/avocado_shake_thumbnail.png",
+      thumbnail: "Thumbnails/avocado_shake_thumbnail.webp",
     },
   };
 
@@ -669,8 +672,6 @@ const LimSimiQuiz = () => {
       mbtiType: "ISFP",
       drink: drinkResults["ISFP"],
     };
-
-    const longPressTimer = useRef(null);
 
     return (
       <div className="quiz-app results-page">
