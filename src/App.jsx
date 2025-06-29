@@ -19,7 +19,7 @@ const LimSimiQuiz = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [titleClickCount, setTitleClickCount] = useState(0);
   const [isValidated, setIsValidated] = useState(false);
-  const validTesterCodes = ["BATOCKS", "KYSUCKS"];
+  const validTesterCodes = ["BATOCKS", "KYSUCKS","HARLOTESTING"];
 
   const handleTesterCodeSubmit = (e) => {
     e.preventDefault();
