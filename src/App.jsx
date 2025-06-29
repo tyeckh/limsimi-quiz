@@ -59,14 +59,14 @@ const LimSimiQuiz = () => {
               LimSimi Quiz
             </h1>
 
-            {titleClickCount > 4 && titleClickCount < 6 && (
+            {titleClickCount > 2 && titleClickCount < 5 && (
               <div className="click-hint">
                 Woah are you sure about this? 🤔
               </div>
             )}
-            {titleClickCount > 8 && titleClickCount < 15 && (
+            {titleClickCount > 5 && titleClickCount < 15 && (
               <div className="click-hint">
-                🤫 {titleClickCount} clicks... keep going!
+                🤫 ok, {titleClickCount} clicks... keep going!
               </div>
             )}
             <div className="validation-card">
